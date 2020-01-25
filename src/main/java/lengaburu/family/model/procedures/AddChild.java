@@ -10,27 +10,11 @@ public class AddChild implements AddMember {
 	@Override
 	public void accept(Member member, Member child) {
 		if (Gender.FEMALE.equals(member.getGender())) {
-			updateChild(child, member);
-			updateMother(child, member);
-			updateFather(child, member);
+			child.setMother(member);
+			child.setFather(member.getSpouse());
 		} else {
 			throw new ChildAdditionFailed();
 		}
 	}
 
-	private void updateChild(Member child, Member mother) {
-		child.setMother(mother);
-		child.setFather(mother.getSpouse());
-	}
-
-	private void updateMother(Member child, Member mother) {
-		mother.addChild(child);
-	}
-
-	private void updateFather(Member child, Member mother) {
-		Member father = mother.getSpouse();
-		if (father != null) {
-			father.addChild(child);
-		}
-	}
 }

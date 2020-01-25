@@ -2,8 +2,8 @@ package lengaburu.family.model;
 
 public final class King extends Member {
 
-	public King(final String name) {
-		super(1, name, Gender.MALE);
+	public King(final Family family, final String name) {
+		super(family, 1, name, Gender.MALE);
 	}
 
 }

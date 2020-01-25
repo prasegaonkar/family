@@ -1,18 +1,18 @@
 package lengaburu.family.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class Member {
+	private final Family family;
 	private final Integer sequenceNumber;
 	private final String name;
 	private final Gender gender;
 	private Member mother;
 	private Member father;
 	private Member spouse;
-	private Set<Member> children = new HashSet<>();
 
-	public Member(Integer sequenceNumber, String name, Gender gender) {
+	public Member(Family family, Integer sequenceNumber, String name, Gender gender) {
+		this.family = family;
 		this.sequenceNumber = sequenceNumber;
 		this.name = name;
 		this.gender = gender;
@@ -54,16 +54,8 @@ public class Member {
 		return gender;
 	}
 
-	public Set<Member> getChildren() {
-		return children;
-	}
-
-	public void addChild(Member child) {
-		children.add(child);
-	}
-
 	public Set<Member> get(Relationship relationship) {
-		Set<Member> apply = relationship.apply(this);
+		Set<Member> apply = relationship.apply(family, this);
 		return apply;
 	}
 

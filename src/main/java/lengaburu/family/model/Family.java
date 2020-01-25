@@ -19,8 +19,8 @@ public class Family {
 	public Family(String name, String kingName, String queenName) {
 		this.name = name;
 		this.namesToMembersMapping = new HashMap<>();
-		final King king = new King(kingName);
-		final Queen queen = new Queen(queenName, king);
+		final King king = new King(this, kingName);
+		final Queen queen = new Queen(this, queenName, king);
 		namesToMembersMapping.put(kingName, king);
 		namesToMembersMapping.put(queenName, queen);
 	}
@@ -35,7 +35,7 @@ public class Family {
 		}
 		newMemberNameUniquenessCheck(spouseName);
 		Member member = namesToMembersMapping.get(memberName);
-		Member spouse = new Member(nextSequenceNumber(), spouseName, member.getGender().opposite());
+		Member spouse = new Member(this, nextSequenceNumber(), spouseName, member.getGender().opposite());
 		member.add(new AddSpouse(), spouse);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
@@ -45,7 +45,7 @@ public class Family {
 			throw new MemberNotFound();
 		}
 		newMemberNameUniquenessCheck(childName);
-		Member child = new Member(nextSequenceNumber(), childName, childGender);
+		Member child = new Member(this, nextSequenceNumber(), childName, childGender);
 		Member member = namesToMembersMapping.get(memberName);
 		member.add(new AddChild(), child);
 		namesToMembersMapping.put(childName, child);
