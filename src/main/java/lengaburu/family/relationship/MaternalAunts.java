@@ -1,5 +1,6 @@
 package lengaburu.family.relationship;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import lengaburu.family.model.FamilyMember;
@@ -9,7 +10,11 @@ public class MaternalAunts implements Relationship {
 
 	@Override
 	public Set<FamilyMember> apply(FamilyMember p) {
-		return p.getMother().getRelatives(new Sisters());
+		FamilyMember mother = p.getMother();
+		if (mother != null) {
+			return mother.getRelatives(new Sisters());
+		}
+		return new HashSet<>();
 	}
 
 }

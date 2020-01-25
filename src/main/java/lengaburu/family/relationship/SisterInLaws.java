@@ -12,7 +12,10 @@ public class SisterInLaws implements Relationship {
 	@Override
 	public Set<FamilyMember> apply(FamilyMember p) {
 		FamilyMember spouse = p.getSpouse();
-		Set<FamilyMember> sistersOfSpouse = spouse.getRelatives(new Sisters());
+		Set<FamilyMember> sistersOfSpouse = new HashSet<>();
+		if (spouse != null) {
+			sistersOfSpouse.addAll(spouse.getRelatives(new Sisters()));
+		}
 		Set<FamilyMember> brothers = p.getRelatives(new Brothers());
 		Set<FamilyMember> wivesOfBrothers = brothers.stream().map(FamilyMember::getSpouse).collect(Collectors.toSet());
 		Set<FamilyMember> sisterInLaws = new HashSet<>();
