@@ -12,7 +12,7 @@ public class MaternalUncles implements Relationship {
 	public Set<FamilyMember> apply(FamilyMember p) {
 		FamilyMember mother = p.getMother();
 		if (mother != null) {
-			return mother.getRelatives(new Brothers());
+			return mother.get(new Brothers());
 		}
 		return new HashSet<>();
 	}

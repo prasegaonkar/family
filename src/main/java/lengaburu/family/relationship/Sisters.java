@@ -11,7 +11,7 @@ public class Sisters implements Relationship {
 
 	@Override
 	public Set<FamilyMember> apply(FamilyMember p) {
-		return p.getRelatives(new Siblings()).stream().filter(x -> Gender.FEMALE.equals(x.getGender()))
+		return p.get(new Siblings()).stream().filter(x -> Gender.FEMALE.equals(x.getGender()))
 				.collect(Collectors.toSet());
 	}
 

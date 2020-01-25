@@ -14,9 +14,9 @@ public class SisterInLaws implements Relationship {
 		FamilyMember spouse = p.getSpouse();
 		Set<FamilyMember> sistersOfSpouse = new HashSet<>();
 		if (spouse != null) {
-			sistersOfSpouse.addAll(spouse.getRelatives(new Sisters()));
+			sistersOfSpouse.addAll(spouse.get(new Sisters()));
 		}
-		Set<FamilyMember> brothers = p.getRelatives(new Brothers());
+		Set<FamilyMember> brothers = p.get(new Brothers());
 		Set<FamilyMember> wivesOfBrothers = brothers.stream().filter(x -> x.getSpouse() != null)
 				.map(FamilyMember::getSpouse).collect(Collectors.toSet());
 		Set<FamilyMember> sisterInLaws = new HashSet<>();

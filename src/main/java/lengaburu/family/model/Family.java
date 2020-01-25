@@ -51,35 +51,31 @@ public class Family {
 		namesToMembersMapping.put(childName, child);
 	}
 
-	public List<String> getRelationship(String memberName, Relationship relationship) {
+	public List<String> get(String memberName, Relationship relationship) {
 		if (namesToMembersMapping.containsKey(memberName) == false) {
 			throw new MemberNotFound();
 		}
 		final FamilyMember member = namesToMembersMapping.get(memberName);
-		final Set<FamilyMember> relatives = member.getRelatives(relationship);
+		final Set<FamilyMember> relatives = member.get(relationship);
 		return relatives.stream().sorted(new BySequenceNumber()).map(FamilyMember::getName)
 				.collect(Collectors.toList());
 	}
 
-	public FamilyMember get(String name) {
-		return namesToMembersMapping.get(name);
-	}
-
-	public Map<String, FamilyMember> getAll() {
-		return namesToMembersMapping;
+	public FamilyMember get(String memberName) {
+		return namesToMembersMapping.get(memberName);
 	}
 
 	private int nextSequenceNumber() {
-		return getNumberOfMembers() + 1;
-	}
-
-	public int getNumberOfMembers() {
-		return namesToMembersMapping.size();
+		return namesToMembersMapping.size() + 1;
 	}
 
 	private void newMemberNameUniquenessCheck(String memberName) {
 		if (namesToMembersMapping.containsKey(memberName)) {
 			throw new MemberAlreadyExists();
 		}
+	}
+
+	public Map<String, FamilyMember> getAll() {
+		return namesToMembersMapping;
 	}
 }
