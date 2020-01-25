@@ -1,5 +1,6 @@
 package lengaburu.family.relationship;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,8 +11,12 @@ public class Siblings implements Relationship {
 
 	@Override
 	public Set<FamilyMember> apply(FamilyMember p) {
-		return p.getMother().getChildren().stream().filter(c -> !c.getName().equals(p.getName()))
-				.collect(Collectors.toSet());
+		FamilyMember mother = p.getMother();
+		if (mother != null) {
+			return mother.getChildren().stream().filter(c -> !c.getName().equals(p.getName()))
+					.collect(Collectors.toSet());
+		}
+		return new HashSet<>();
 	}
 
 }

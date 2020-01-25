@@ -1,6 +1,5 @@
 package lengaburu.family.model;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +33,7 @@ public class Family {
 		if (namesToMembersMapping.containsKey(familyMemberName) == false) {
 			throw new MemberNotFound();
 		}
-		if (namesToMembersMapping.containsKey(spouseName)) {
-			throw new MemberAlreadyExists();
-		}
+		newMemberNameUniquenessCheck(spouseName);
 		FamilyMember member = namesToMembersMapping.get(familyMemberName);
 		FamilyMember spouse = new FamilyMember(nextSequenceNumber(), spouseName, member.getGender().opposite());
 		new AddSpouse().add(spouse, member);
@@ -47,9 +44,7 @@ public class Family {
 		if (namesToMembersMapping.containsKey(memberName) == false) {
 			throw new MemberNotFound();
 		}
-		if (namesToMembersMapping.containsKey(childName)) {
-			throw new MemberAlreadyExists();
-		}
+		newMemberNameUniquenessCheck(childName);
 		FamilyMember child = new FamilyMember(nextSequenceNumber(), childName, childGender);
 		FamilyMember member = namesToMembersMapping.get(memberName);
 		new AddChild().add(child, member);
@@ -70,6 +65,10 @@ public class Family {
 		return namesToMembersMapping.get(name);
 	}
 
+	public Map<String, FamilyMember> getAll() {
+		return namesToMembersMapping;
+	}
+
 	private int nextSequenceNumber() {
 		return getNumberOfMembers() + 1;
 	}
@@ -78,12 +77,9 @@ public class Family {
 		return namesToMembersMapping.size();
 	}
 
-	@Override
-	public String toString() {
-		final StringBuilder builder = new StringBuilder();
-		namesToMembersMapping.values().stream().sorted(Comparator.comparingInt(FamilyMember::getSequenceNumber))
-				.forEach(e -> builder.append(e).append("\n"));
-		return builder.toString();
+	private void newMemberNameUniquenessCheck(String memberName) {
+		if (namesToMembersMapping.containsKey(memberName)) {
+			throw new MemberAlreadyExists();
+		}
 	}
-
 }
