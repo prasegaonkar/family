@@ -19,8 +19,6 @@ public class FamilyTest {
 
 	@Test
 	public void testForFirstFamilyMembers() {
-		assertThat(family.getNumberOfMembers()).isEqualTo(11);
-
 		FamilyMember king = family.get("King Shan");
 		FamilyMember queen = family.get("Queen Anga");
 

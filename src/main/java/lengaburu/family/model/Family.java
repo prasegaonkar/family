@@ -30,15 +30,15 @@ public class Family {
 		return this.name;
 	}
 
-	public void addSpouse(String familyMemberName, String spouseName, Gender spouseGender) {
+	public void addSpouse(String familyMemberName, String spouseName) {
 		if (namesToMembersMapping.containsKey(familyMemberName) == false) {
 			throw new MemberNotFound();
 		}
 		if (namesToMembersMapping.containsKey(spouseName)) {
 			throw new MemberAlreadyExists();
 		}
-		FamilyMember spouse = new FamilyMember(nextSequenceNumber(), spouseName, spouseGender);
 		FamilyMember member = namesToMembersMapping.get(familyMemberName);
+		FamilyMember spouse = new FamilyMember(nextSequenceNumber(), spouseName, member.getGender().opposite());
 		new AddSpouse().add(spouse, member);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
