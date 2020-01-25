@@ -86,7 +86,9 @@ public class FamilyMember {
 				+ "\n, mother=" + (mother != null ? mother.name : null) + "\n, father="
 				+ (father != null ? father.name : null) + "\n, spouse=" + (spouse != null ? spouse.name : null)
 				+ "\n, brotherInLaws="
-				+ getRelatives(new BrotherInLaws()).stream().map(FamilyMember::getName).collect(Collectors.toList())
+				+ getRelatives(new BrotherInLaws()).stream().map(FamilyMember::getName).collect(Collectors.joining(","))
+				+ "\n, sisterInLaws="
+				+ getRelatives(new SisterInLaws()).stream().map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "\n, siblings="
 				+ getRelatives(new Siblings()).stream().map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "\n, sisters="
@@ -103,8 +105,6 @@ public class FamilyMember {
 				+ "\n, paternalUncles="
 				+ getRelatives(new PaternalUncles()).stream().map(FamilyMember::getName)
 						.collect(Collectors.joining(","))
-				+ "\n, sisterInLaws="
-				+ getRelatives(new SisterInLaws()).stream().map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "\n, children=" + children.stream().map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "\n, daughters="
 				+ getRelatives(new Daughters()).stream().map(FamilyMember::getName).collect(Collectors.joining(","))
