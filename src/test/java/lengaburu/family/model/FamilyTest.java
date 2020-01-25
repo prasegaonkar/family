@@ -1,27 +1,23 @@
-package lengaburu.family;
+package lengaburu.family.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import lengaburu.family.model.Family;
-import lengaburu.family.model.FamilyMember;
-import lengaburu.family.model.Gender;
 import lengaburu.family.relationship.Daughters;
 import lengaburu.family.relationship.Sons;
 
-public class AppTest {
-	private App app = null;
+public class FamilyTest {
+	private Family family = null;
 
 	@Before
 	public void setup() {
-		this.app = new App();
+		this.family = InitialSetup.setup();
 	}
 
 	@Test
 	public void testForFirstFamilyMembers() {
-		Family family = app.getFamily();
 		assertThat(family.getNumberOfMembers()).isEqualTo(11);
 
 		FamilyMember king = family.get("King Shan");
