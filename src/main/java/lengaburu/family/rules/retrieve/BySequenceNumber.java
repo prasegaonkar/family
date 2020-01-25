@@ -2,11 +2,11 @@ package lengaburu.family.rules.retrieve;
 
 import java.util.Comparator;
 
-import lengaburu.family.model.FamilyMember;
+import lengaburu.family.model.Member;
 
-public class BySequenceNumber implements Comparator<FamilyMember> {
+public class BySequenceNumber implements Comparator<Member> {
 
-	public int compare(FamilyMember o1, FamilyMember o2) {
+	public int compare(Member o1, Member o2) {
 		return o1.getSequenceNumber().compareTo(o2.getSequenceNumber());
 	}
 

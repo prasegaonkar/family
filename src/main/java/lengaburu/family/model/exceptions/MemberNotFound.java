@@ -1,4 +1,4 @@
-package lengaburu.family.exceptions;
+package lengaburu.family.model.exceptions;
 
 public class MemberNotFound extends RuntimeException {
 

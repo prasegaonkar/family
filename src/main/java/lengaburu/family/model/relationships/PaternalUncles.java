@@ -1,16 +1,16 @@
-package lengaburu.family.relationship;
+package lengaburu.family.model.relationships;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import lengaburu.family.model.FamilyMember;
+import lengaburu.family.model.Member;
 import lengaburu.family.model.Relationship;
 
 public class PaternalUncles implements Relationship {
 
 	@Override
-	public Set<FamilyMember> apply(FamilyMember p) {
-		FamilyMember father = p.getFather();
+	public Set<Member> apply(Member p) {
+		Member father = p.getFather();
 		if (father != null) {
 			return father.get(new Brothers());
 		}

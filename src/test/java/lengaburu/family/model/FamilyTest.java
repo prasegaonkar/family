@@ -6,18 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import lengaburu.family.InitialSetup;
-import lengaburu.family.relationship.BrotherInLaws;
-import lengaburu.family.relationship.Brothers;
-import lengaburu.family.relationship.Children;
-import lengaburu.family.relationship.Daughters;
-import lengaburu.family.relationship.MaternalAunts;
-import lengaburu.family.relationship.MaternalUncles;
-import lengaburu.family.relationship.PaternalAunts;
-import lengaburu.family.relationship.PaternalUncles;
-import lengaburu.family.relationship.Siblings;
-import lengaburu.family.relationship.SisterInLaws;
-import lengaburu.family.relationship.Sisters;
-import lengaburu.family.relationship.Sons;
+import lengaburu.family.model.relationships.BrotherInLaws;
+import lengaburu.family.model.relationships.Brothers;
+import lengaburu.family.model.relationships.Children;
+import lengaburu.family.model.relationships.Daughters;
+import lengaburu.family.model.relationships.MaternalAunts;
+import lengaburu.family.model.relationships.MaternalUncles;
+import lengaburu.family.model.relationships.PaternalAunts;
+import lengaburu.family.model.relationships.PaternalUncles;
+import lengaburu.family.model.relationships.Siblings;
+import lengaburu.family.model.relationships.SisterInLaws;
+import lengaburu.family.model.relationships.Sisters;
+import lengaburu.family.model.relationships.Sons;
 
 public class FamilyTest {
 	private Family family = null;
@@ -42,7 +42,7 @@ public class FamilyTest {
 	@Test
 	public void testForKingShan() {
 		final String name = "King Shan";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(1);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -66,7 +66,7 @@ public class FamilyTest {
 	@Test
 	public void testForQueenAnga() {
 		final String name = "Queen Anga";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(2);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -90,7 +90,7 @@ public class FamilyTest {
 	@Test
 	public void testForChit() {
 		final String name = "Chit";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(3);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -114,7 +114,7 @@ public class FamilyTest {
 	@Test
 	public void testForIsh() {
 		final String name = "Ish";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(4);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -138,7 +138,7 @@ public class FamilyTest {
 	@Test
 	public void testForVich() {
 		final String name = "Vich";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(5);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -162,7 +162,7 @@ public class FamilyTest {
 	@Test
 	public void testForAras() {
 		final String name = "Aras";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(6);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -186,7 +186,7 @@ public class FamilyTest {
 	@Test
 	public void testForSatya() {
 		final String name = "Satya";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(7);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -210,7 +210,7 @@ public class FamilyTest {
 	@Test
 	public void testForAmba() {
 		final String name = "Amba";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(8);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -234,7 +234,7 @@ public class FamilyTest {
 	@Test
 	public void testForLika() {
 		final String name = "Lika";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(9);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -258,7 +258,7 @@ public class FamilyTest {
 	@Test
 	public void testForChitra() {
 		final String name = "Chitra";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(10);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -282,7 +282,7 @@ public class FamilyTest {
 	@Test
 	public void testForVyan() {
 		final String name = "Vyan";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(11);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -306,7 +306,7 @@ public class FamilyTest {
 	@Test
 	public void testForDritha() {
 		final String name = "Dritha";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(12);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -330,7 +330,7 @@ public class FamilyTest {
 	@Test
 	public void testForTritha() {
 		final String name = "Tritha";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(13);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -354,7 +354,7 @@ public class FamilyTest {
 	@Test
 	public void testForVritha() {
 		final String name = "Vritha";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(14);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -378,7 +378,7 @@ public class FamilyTest {
 	@Test
 	public void testForVila() {
 		final String name = "Vila";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(15);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -402,7 +402,7 @@ public class FamilyTest {
 	@Test
 	public void testForChika() {
 		final String name = "Chika";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(16);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -426,7 +426,7 @@ public class FamilyTest {
 	@Test
 	public void testForJnki() {
 		final String name = "Jnki";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(17);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -450,7 +450,7 @@ public class FamilyTest {
 	@Test
 	public void testForAhit() {
 		final String name = "Ahit";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(18);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -474,7 +474,7 @@ public class FamilyTest {
 	@Test
 	public void testForAsva() {
 		final String name = "Asva";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(19);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -498,7 +498,7 @@ public class FamilyTest {
 	@Test
 	public void testForVyas() {
 		final String name = "Vyas";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(20);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -522,7 +522,7 @@ public class FamilyTest {
 	@Test
 	public void testForAtya() {
 		final String name = "Atya";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(21);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -546,7 +546,7 @@ public class FamilyTest {
 	@Test
 	public void testForJaya() {
 		final String name = "Jaya";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(22);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -570,7 +570,7 @@ public class FamilyTest {
 	@Test
 	public void testForArit() {
 		final String name = "Arit";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(23);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -594,7 +594,7 @@ public class FamilyTest {
 	@Test
 	public void testForSatvy() {
 		final String name = "Satvy";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(24);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -618,7 +618,7 @@ public class FamilyTest {
 	@Test
 	public void testForKrpi() {
 		final String name = "Krpi";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(25);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -642,7 +642,7 @@ public class FamilyTest {
 	@Test
 	public void testForYodhan() {
 		final String name = "Yodhan";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(26);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -666,7 +666,7 @@ public class FamilyTest {
 	@Test
 	public void testForLaki() {
 		final String name = "Laki";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(27);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -690,7 +690,7 @@ public class FamilyTest {
 	@Test
 	public void testForLavnya() {
 		final String name = "Lavnya";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(28);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
@@ -714,7 +714,7 @@ public class FamilyTest {
 	@Test
 	public void testForVasa() {
 		final String name = "Vasa";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(29);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -738,7 +738,7 @@ public class FamilyTest {
 	@Test
 	public void testForKriya() {
 		final String name = "Kriya";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(30);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.MALE);
@@ -762,7 +762,7 @@ public class FamilyTest {
 	@Test
 	public void testForKrithi() {
 		final String name = "Krithi";
-		final FamilyMember m = family.get(name);
+		final Member m = family.get(name);
 		assertThat(m.getSequenceNumber()).isEqualTo(31);
 		assertThat(m.getName()).isEqualTo(name);
 		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
