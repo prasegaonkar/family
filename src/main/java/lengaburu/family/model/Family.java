@@ -19,8 +19,9 @@ public class Family {
 	public Family(String name, String kingName, String queenName) {
 		this.name = name;
 		this.namesToMembersMapping = new HashMap<>();
-		final King king = new King(this, kingName);
-		final Queen queen = new Queen(this, queenName, king);
+		final Member king = new Member(this, 1, kingName, Gender.MALE);
+		final Member queen = new Member(this, 2, queenName, Gender.FEMALE);
+		king.add(new AddSpouse(), queen);
 		namesToMembersMapping.put(kingName, king);
 		namesToMembersMapping.put(queenName, queen);
 	}
