@@ -27,7 +27,6 @@ public class FamilyTest {
 		assertThat(king.getFather()).isNull();
 		assertThat(king.getSpouse()).isEqualTo(queen);
 		assertThat(king.getGender()).isEqualTo(Gender.MALE);
-		assertThat(king.getSiblings()).isNullOrEmpty();
 		assertThat(king.getChildren()).isNotEmpty();
 		assertThat(king.getChildren().size()).isEqualTo(5);
 		assertThat(king.getRelatives(new Sons()).size()).isEqualTo(4);
@@ -38,7 +37,6 @@ public class FamilyTest {
 		assertThat(queen.getFather()).isNull();
 		assertThat(queen.getSpouse()).isEqualTo(king);
 		assertThat(queen.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(queen.getSiblings()).isNullOrEmpty();
 		assertThat(queen.getChildren()).isNotEmpty();
 		assertThat(queen.getChildren().size()).isEqualTo(5);
 		assertThat(queen.getRelatives(new Sons()).size()).isEqualTo(4);

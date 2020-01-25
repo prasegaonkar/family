@@ -12,7 +12,6 @@ public class FamilyMember {
 	private FamilyMember mother;
 	private FamilyMember father;
 	private FamilyMember spouse;
-	private Set<FamilyMember> siblings = new HashSet<>();
 	private Set<FamilyMember> children = new HashSet<>();
 
 	public FamilyMember(Integer sequenceNumber, String name, Gender gender) {
@@ -39,18 +38,6 @@ public class FamilyMember {
 
 	public void setFather(FamilyMember father) {
 		this.father = father;
-	}
-
-	public Set<FamilyMember> getSiblings() {
-		return siblings;
-	}
-
-	public void addSibling(FamilyMember sibling) {
-		siblings.add(sibling);
-	}
-
-	public void addSiblings(Set<FamilyMember> siblings) {
-		this.siblings.addAll(siblings);
 	}
 
 	public FamilyMember getSpouse() {
@@ -86,9 +73,6 @@ public class FamilyMember {
 		return "FamilyMember [sequenceNumber=" + sequenceNumber + "\n, name=" + name + "\n, gender=" + gender
 				+ "\n, mother=" + (mother != null ? mother.name : null) + "\n, father="
 				+ (father != null ? father.name : null) + "\n, spouse=" + (spouse != null ? spouse.name : null)
-				+ "\n, siblings="
-				+ siblings.stream().sorted(Comparator.comparingInt(FamilyMember::getSequenceNumber))
-						.map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "\n, children=" + children.stream().sorted(Comparator.comparingInt(FamilyMember::getSequenceNumber))
 						.map(FamilyMember::getName).collect(Collectors.joining(","))
 				+ "]\n";
