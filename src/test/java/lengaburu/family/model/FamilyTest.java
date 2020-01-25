@@ -21,6 +21,18 @@ import lengaburu.family.relationship.Sons;
 
 public class FamilyTest {
 	private Family family = null;
+	private Siblings siblings = new Siblings();
+	private SisterInLaws sisterInLaws = new SisterInLaws();
+	private BrotherInLaws brotherInLaws = new BrotherInLaws();
+	private Sisters sisters = new Sisters();
+	private Brothers brothers = new Brothers();
+	private MaternalAunts maternalAunts = new MaternalAunts();
+	private MaternalUncles maternalUncles = new MaternalUncles();
+	private PaternalAunts paternalAunts = new PaternalAunts();
+	private PaternalUncles paternalUncles = new PaternalUncles();
+	private Children children = new Children();
+	private Daughters daughters = new Daughters();
+	private Sons sons = new Sons();
 
 	@Before
 	public void setup() {
@@ -37,18 +49,18 @@ public class FamilyTest {
 		assertThat(m.getMother()).isNull();
 		assertThat(m.getFather()).isNull();
 		assertThat(m.getSpouse().getName()).isEqualTo("Queen Anga");
-		assertThat(family.get(name, new Siblings())).isNullOrEmpty();
-		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
-		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
-		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Chit", "Ish", "Vich", "Aras", "Satya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Satya");
-		assertThat(family.get(name, new Sons())).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, siblings)).isNullOrEmpty();
+		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
+		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
+		assertThat(family.get(name, sisters)).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Chit", "Ish", "Vich", "Aras", "Satya");
+		assertThat(family.get(name, daughters)).containsExactly("Satya");
+		assertThat(family.get(name, sons)).containsExactly("Chit", "Ish", "Vich", "Aras");
 	}
 
 	@Test
@@ -65,14 +77,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Chit", "Ish", "Vich", "Aras", "Satya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Satya");
-		assertThat(family.get(name, new Sons())).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Chit", "Ish", "Vich", "Aras", "Satya");
+		assertThat(family.get(name, daughters)).containsExactly("Satya");
+		assertThat(family.get(name, sons)).containsExactly("Chit", "Ish", "Vich", "Aras");
 	}
 
 	@Test
@@ -89,14 +101,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Lika", "Chitra");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vyan");
 		assertThat(family.get(name, new Sisters())).containsExactly("Satya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Ish", "Vich", "Aras");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Dritha", "Tritha", "Vritha");
-		assertThat(family.get(name, new Daughters())).containsExactly("Dritha", "Tritha");
-		assertThat(family.get(name, new Sons())).containsExactly("Vritha");
+		assertThat(family.get(name, brothers)).containsExactly("Ish", "Vich", "Aras");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Dritha", "Tritha", "Vritha");
+		assertThat(family.get(name, daughters)).containsExactly("Dritha", "Tritha");
+		assertThat(family.get(name, sons)).containsExactly("Vritha");
 	}
 
 	@Test
@@ -113,14 +125,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Amba", "Lika", "Chitra");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vyan");
 		assertThat(family.get(name, new Sisters())).containsExactly("Satya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Chit", "Vich", "Aras");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Chit", "Vich", "Aras");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -137,14 +149,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Amba", "Chitra");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vyan");
 		assertThat(family.get(name, new Sisters())).containsExactly("Satya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Chit", "Ish", "Aras");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Vila", "Chika");
-		assertThat(family.get(name, new Daughters())).containsExactly("Vila", "Chika");
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Chit", "Ish", "Aras");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Vila", "Chika");
+		assertThat(family.get(name, daughters)).containsExactly("Vila", "Chika");
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -161,14 +173,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Amba", "Lika");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vyan");
 		assertThat(family.get(name, new Sisters())).containsExactly("Satya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Chit", "Ish", "Vich");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Jnki", "Ahit");
-		assertThat(family.get(name, new Daughters())).containsExactly("Jnki");
-		assertThat(family.get(name, new Sons())).containsExactly("Ahit");
+		assertThat(family.get(name, brothers)).containsExactly("Chit", "Ish", "Vich");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Jnki", "Ahit");
+		assertThat(family.get(name, daughters)).containsExactly("Jnki");
+		assertThat(family.get(name, sons)).containsExactly("Ahit");
 	}
 
 	@Test
@@ -185,14 +197,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Amba", "Lika", "Chitra");
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).containsExactly("Chit", "Ish", "Vich", "Aras");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Asva", "Vyas", "Atya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Atya");
-		assertThat(family.get(name, new Sons())).containsExactly("Asva", "Vyas");
+		assertThat(family.get(name, brothers)).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Asva", "Vyas", "Atya");
+		assertThat(family.get(name, daughters)).containsExactly("Atya");
+		assertThat(family.get(name, sons)).containsExactly("Asva", "Vyas");
 	}
 
 	@Test
@@ -209,14 +221,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Satya");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Ish", "Vich", "Aras");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Dritha", "Tritha", "Vritha");
-		assertThat(family.get(name, new Daughters())).containsExactly("Dritha", "Tritha");
-		assertThat(family.get(name, new Sons())).containsExactly("Vritha");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Dritha", "Tritha", "Vritha");
+		assertThat(family.get(name, daughters)).containsExactly("Dritha", "Tritha");
+		assertThat(family.get(name, sons)).containsExactly("Vritha");
 	}
 
 	@Test
@@ -233,14 +245,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Satya");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Chit", "Ish", "Aras");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Vila", "Chika");
-		assertThat(family.get(name, new Daughters())).containsExactly("Vila", "Chika");
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Vila", "Chika");
+		assertThat(family.get(name, daughters)).containsExactly("Vila", "Chika");
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -257,14 +269,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Satya");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Chit", "Ish", "Vich");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Jnki", "Ahit");
-		assertThat(family.get(name, new Daughters())).containsExactly("Jnki");
-		assertThat(family.get(name, new Sons())).containsExactly("Ahit");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Jnki", "Ahit");
+		assertThat(family.get(name, daughters)).containsExactly("Jnki");
+		assertThat(family.get(name, sons)).containsExactly("Ahit");
 	}
 
 	@Test
@@ -281,14 +293,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Chit", "Ish", "Vich", "Aras");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Asva", "Vyas", "Atya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Atya");
-		assertThat(family.get(name, new Sons())).containsExactly("Asva", "Vyas");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Asva", "Vyas", "Atya");
+		assertThat(family.get(name, daughters)).containsExactly("Atya");
+		assertThat(family.get(name, sons)).containsExactly("Asva", "Vyas");
 	}
 
 	@Test
@@ -305,14 +317,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Tritha");
-		assertThat(family.get(name, new Brothers())).containsExactly("Vritha");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Ish", "Vich", "Aras");
-		assertThat(family.get(name, new Children())).containsExactly("Yodhan");
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).containsExactly("Yodhan");
+		assertThat(family.get(name, brothers)).containsExactly("Vritha");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Ish", "Vich", "Aras");
+		assertThat(family.get(name, children)).containsExactly("Yodhan");
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).containsExactly("Yodhan");
 	}
 
 	@Test
@@ -329,14 +341,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Jaya");
 		assertThat(family.get(name, new Sisters())).containsExactly("Dritha");
-		assertThat(family.get(name, new Brothers())).containsExactly("Vritha");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Ish", "Vich", "Aras");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Vritha");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Ish", "Vich", "Aras");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -353,14 +365,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Jaya");
 		assertThat(family.get(name, new Sisters())).containsExactly("Dritha", "Tritha");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Ish", "Vich", "Aras");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Ish", "Vich", "Aras");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -377,14 +389,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Chika");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Chit", "Ish", "Aras");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Chit", "Ish", "Aras");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -401,14 +413,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Vila");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Chit", "Ish", "Aras");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Chit", "Ish", "Aras");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -425,14 +437,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).containsExactly("Ahit");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Chit", "Ish", "Vich");
-		assertThat(family.get(name, new Children())).containsExactly("Laki", "Lavnya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Lavnya");
-		assertThat(family.get(name, new Sons())).containsExactly("Laki");
+		assertThat(family.get(name, brothers)).containsExactly("Ahit");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Chit", "Ish", "Vich");
+		assertThat(family.get(name, children)).containsExactly("Laki", "Lavnya");
+		assertThat(family.get(name, daughters)).containsExactly("Lavnya");
+		assertThat(family.get(name, sons)).containsExactly("Laki");
 	}
 
 	@Test
@@ -449,14 +461,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Arit");
 		assertThat(family.get(name, new Sisters())).containsExactly("Jnki");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Satya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Chit", "Ish", "Vich");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Satya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Chit", "Ish", "Vich");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -473,14 +485,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Krpi");
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Atya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Vyas");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Chit", "Ish", "Vich", "Aras");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Vasa");
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).containsExactly("Vasa");
+		assertThat(family.get(name, brothers)).containsExactly("Vyas");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Vasa");
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).containsExactly("Vasa");
 	}
 
 	@Test
@@ -497,14 +509,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Satvy");
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Atya");
-		assertThat(family.get(name, new Brothers())).containsExactly("Asva");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Chit", "Ish", "Vich", "Aras");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Kriya", "Krithi");
-		assertThat(family.get(name, new Daughters())).containsExactly("Krithi");
-		assertThat(family.get(name, new Sons())).containsExactly("Kriya");
+		assertThat(family.get(name, brothers)).containsExactly("Asva");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Kriya", "Krithi");
+		assertThat(family.get(name, daughters)).containsExactly("Krithi");
+		assertThat(family.get(name, sons)).containsExactly("Kriya");
 	}
 
 	@Test
@@ -521,14 +533,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Satvy", "Krpi");
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).containsExactly("Asva", "Vyas");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Chit", "Ish", "Vich", "Aras");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Asva", "Vyas");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).containsExactly("Chit", "Ish", "Vich", "Aras");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -545,14 +557,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Tritha");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vritha");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Yodhan");
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).containsExactly("Yodhan");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Yodhan");
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).containsExactly("Yodhan");
 	}
 
 	@Test
@@ -569,14 +581,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Ahit");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Laki", "Lavnya");
-		assertThat(family.get(name, new Daughters())).containsExactly("Lavnya");
-		assertThat(family.get(name, new Sons())).containsExactly("Laki");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Laki", "Lavnya");
+		assertThat(family.get(name, daughters)).containsExactly("Lavnya");
+		assertThat(family.get(name, sons)).containsExactly("Laki");
 	}
 
 	@Test
@@ -593,14 +605,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Atya");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Vyas");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Vasa");
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).containsExactly("Vasa");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Vasa");
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).containsExactly("Vasa");
 	}
 
 	@Test
@@ -617,14 +629,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).containsExactly("Atya");
 		assertThat(family.get(name, new BrotherInLaws())).containsExactly("Asva");
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).containsExactly("Kriya", "Krithi");
-		assertThat(family.get(name, new Daughters())).containsExactly("Krithi");
-		assertThat(family.get(name, new Sons())).containsExactly("Kriya");
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).containsExactly("Kriya", "Krithi");
+		assertThat(family.get(name, daughters)).containsExactly("Krithi");
+		assertThat(family.get(name, sons)).containsExactly("Kriya");
 	}
 
 	@Test
@@ -641,14 +653,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).containsExactly("Tritha");
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Vritha");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).containsExactly("Tritha");
+		assertThat(family.get(name, maternalUncles)).containsExactly("Vritha");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -665,14 +677,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Lavnya");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Ahit");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).containsExactly("Ahit");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -689,14 +701,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).containsExactly("Laki");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).containsExactly("Ahit");
-		assertThat(family.get(name, new PaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Laki");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).containsExactly("Ahit");
+		assertThat(family.get(name, paternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, paternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -713,14 +725,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Atya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Vyas");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Atya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Vyas");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -737,14 +749,14 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).containsExactly("Krithi");
-		assertThat(family.get(name, new Brothers())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Atya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Asva");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).isNullOrEmpty();
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Atya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Asva");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 
 	@Test
@@ -761,13 +773,13 @@ public class FamilyTest {
 		assertThat(family.get(name, new SisterInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new BrotherInLaws())).isNullOrEmpty();
 		assertThat(family.get(name, new Sisters())).isNullOrEmpty();
-		assertThat(family.get(name, new Brothers())).containsExactly("Kriya");
-		assertThat(family.get(name, new MaternalAunts())).isNullOrEmpty();
-		assertThat(family.get(name, new MaternalUncles())).isNullOrEmpty();
-		assertThat(family.get(name, new PaternalAunts())).containsExactly("Atya");
-		assertThat(family.get(name, new PaternalUncles())).containsExactly("Asva");
-		assertThat(family.get(name, new Children())).isNullOrEmpty();
-		assertThat(family.get(name, new Daughters())).isNullOrEmpty();
-		assertThat(family.get(name, new Sons())).isNullOrEmpty();
+		assertThat(family.get(name, brothers)).containsExactly("Kriya");
+		assertThat(family.get(name, maternalAunts)).isNullOrEmpty();
+		assertThat(family.get(name, maternalUncles)).isNullOrEmpty();
+		assertThat(family.get(name, paternalAunts)).containsExactly("Atya");
+		assertThat(family.get(name, paternalUncles)).containsExactly("Asva");
+		assertThat(family.get(name, children)).isNullOrEmpty();
+		assertThat(family.get(name, daughters)).isNullOrEmpty();
+		assertThat(family.get(name, sons)).isNullOrEmpty();
 	}
 }
