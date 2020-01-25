@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
+import lengaburu.family.InitialSetup;
 import lengaburu.family.relationship.Daughters;
 import lengaburu.family.relationship.Sons;
 

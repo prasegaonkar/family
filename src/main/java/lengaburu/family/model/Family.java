@@ -2,12 +2,16 @@ package lengaburu.family.model;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import lengaburu.family.exceptions.MemberNotFoundException;
-import lengaburu.family.exceptions.MemberAlreadyExistsException;
+import lengaburu.family.exceptions.MemberAlreadyExists;
+import lengaburu.family.exceptions.MemberNotFound;
 import lengaburu.family.rules.add.AddChild;
 import lengaburu.family.rules.add.AddSpouse;
+import lengaburu.family.rules.retrieve.BySequenceNumber;
 
 public class Family {
 	private final String name;
@@ -28,10 +32,10 @@ public class Family {
 
 	public void addSpouse(String familyMemberName, String spouseName, Gender spouseGender) {
 		if (namesToMembersMapping.containsKey(familyMemberName) == false) {
-			throw new MemberNotFoundException();
+			throw new MemberNotFound();
 		}
 		if (namesToMembersMapping.containsKey(spouseName)) {
-			throw new MemberAlreadyExistsException();
+			throw new MemberAlreadyExists();
 		}
 		FamilyMember spouse = new FamilyMember(nextSequenceNumber(), spouseName, spouseGender);
 		FamilyMember member = namesToMembersMapping.get(familyMemberName);
@@ -39,17 +43,27 @@ public class Family {
 		namesToMembersMapping.put(spouseName, spouse);
 	}
 
-	public void addChild(String motherName, String childName, Gender childGender) {
-		if (namesToMembersMapping.containsKey(motherName) == false) {
-			throw new MemberNotFoundException();
+	public void addChild(String memberName, String childName, Gender childGender) {
+		if (namesToMembersMapping.containsKey(memberName) == false) {
+			throw new MemberNotFound();
 		}
 		if (namesToMembersMapping.containsKey(childName)) {
-			throw new MemberAlreadyExistsException();
+			throw new MemberAlreadyExists();
 		}
 		FamilyMember child = new FamilyMember(nextSequenceNumber(), childName, childGender);
-		FamilyMember mother = namesToMembersMapping.get(motherName);
-		new AddChild().add(child, mother);
+		FamilyMember member = namesToMembersMapping.get(memberName);
+		new AddChild().add(child, member);
 		namesToMembersMapping.put(childName, child);
+	}
+
+	public List<String> getRelationship(String memberName, Relationship relationship) {
+		if (namesToMembersMapping.containsKey(memberName) == false) {
+			throw new MemberNotFound();
+		}
+		final FamilyMember member = namesToMembersMapping.get(memberName);
+		final Set<FamilyMember> relatives = member.getRelatives(relationship);
+		return relatives.stream().sorted(new BySequenceNumber()).map(FamilyMember::getName)
+				.collect(Collectors.toList());
 	}
 
 	public FamilyMember get(String name) {

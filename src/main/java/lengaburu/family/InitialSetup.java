@@ -1,4 +1,7 @@
-package lengaburu.family.model;
+package lengaburu.family;
+
+import lengaburu.family.model.Family;
+import lengaburu.family.model.Gender;
 
 public class InitialSetup {
 	public static Family setup() {
