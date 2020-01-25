@@ -1,16 +1,14 @@
 package lengaburu.family.model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import lengaburu.family.model.exceptions.MemberAlreadyExists;
 import lengaburu.family.model.exceptions.MemberNotFound;
 import lengaburu.family.model.procedures.AddChild;
 import lengaburu.family.model.procedures.AddSpouse;
-import lengaburu.family.rules.retrieve.BySequenceNumber;
 
 public class Family {
 	private final String name;
@@ -18,9 +16,9 @@ public class Family {
 
 	public Family(String name, String kingName, String queenName) {
 		this.name = name;
-		this.namesToMembersMapping = new HashMap<>();
-		final Member king = new Member(this, 1, kingName, Gender.MALE);
-		final Member queen = new Member(this, 2, queenName, Gender.FEMALE);
+		this.namesToMembersMapping = new LinkedHashMap<>();
+		final Member king = new Member(this, kingName, Gender.MALE);
+		final Member queen = new Member(this, queenName, Gender.FEMALE);
 		king.add(new AddSpouse(), queen);
 		namesToMembersMapping.put(kingName, king);
 		namesToMembersMapping.put(queenName, queen);
@@ -36,7 +34,7 @@ public class Family {
 		}
 		newMemberNameUniquenessCheck(spouseName);
 		Member member = namesToMembersMapping.get(memberName);
-		Member spouse = new Member(this, nextSequenceNumber(), spouseName, member.getGender().opposite());
+		Member spouse = new Member(this, spouseName, member.getGender().opposite());
 		member.add(new AddSpouse(), spouse);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
@@ -46,7 +44,7 @@ public class Family {
 			throw new MemberNotFound();
 		}
 		newMemberNameUniquenessCheck(childName);
-		Member child = new Member(this, nextSequenceNumber(), childName, childGender);
+		Member child = new Member(this, childName, childGender);
 		Member member = namesToMembersMapping.get(memberName);
 		member.add(new AddChild(), child);
 		namesToMembersMapping.put(childName, child);
@@ -57,16 +55,12 @@ public class Family {
 			throw new MemberNotFound();
 		}
 		final Member member = namesToMembersMapping.get(memberName);
-		final Set<Member> relatives = member.get(relationship);
-		return relatives.stream().sorted(new BySequenceNumber()).map(Member::getName).collect(Collectors.toList());
+		final List<Member> relatives = member.get(relationship);
+		return relatives.stream().map(Member::getName).collect(Collectors.toList());
 	}
 
 	public Member get(String memberName) {
 		return namesToMembersMapping.get(memberName);
-	}
-
-	private int nextSequenceNumber() {
-		return namesToMembersMapping.size() + 1;
 	}
 
 	private void newMemberNameUniquenessCheck(String memberName) {

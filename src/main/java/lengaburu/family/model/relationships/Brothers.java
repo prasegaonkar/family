@@ -1,6 +1,6 @@
 package lengaburu.family.model.relationships;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import lengaburu.family.model.Family;
@@ -11,9 +11,9 @@ import lengaburu.family.model.Relationship;
 public class Brothers implements Relationship {
 
 	@Override
-	public Set<Member> apply(Family family, Member member) {
+	public List<Member> apply(Family family, Member member) {
 		return member.get(new Siblings()).stream().filter(x -> Gender.MALE.equals(x.getGender()))
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
 }
