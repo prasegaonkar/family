@@ -42,7 +42,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<!-- This is main class of your program which will be executed -->
-							<mainClass>lengaburu.family.App</mainClass>
+							<mainClass>lengaburu.family.app.App</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
