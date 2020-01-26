@@ -3,7 +3,6 @@ package lengaburu.family.commands;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import lengaburu.family.AppCommand;
 import lengaburu.family.model.Family;
 import lengaburu.family.model.Gender;
 import lengaburu.family.model.exceptions.ChildAdditionFailed;

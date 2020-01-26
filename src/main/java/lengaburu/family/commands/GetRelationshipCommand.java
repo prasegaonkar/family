@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lengaburu.family.AppCommand;
 import lengaburu.family.model.Family;
 import lengaburu.family.model.exceptions.MemberNotFound;
 import lengaburu.family.model.relationships.Relationships;

@@ -4,6 +4,6 @@ import java.util.function.BiConsumer;
 
 import lengaburu.family.model.Member;
 
-public interface AddMember extends BiConsumer<Member, Member> {
+interface AddMember extends BiConsumer<Member, Member> {
 
 }

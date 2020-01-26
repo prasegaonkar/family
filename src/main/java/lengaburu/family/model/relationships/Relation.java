@@ -6,6 +6,6 @@ import java.util.function.BiFunction;
 import lengaburu.family.model.Family;
 import lengaburu.family.model.Member;
 
-public interface Relation extends BiFunction<Family, Member, List<Member>> {
+interface Relation extends BiFunction<Family, Member, List<Member>> {
 
 }
