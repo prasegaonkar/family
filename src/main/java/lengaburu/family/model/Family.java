@@ -28,17 +28,6 @@ public class Family {
 		return this.name;
 	}
 
-	public void addSpouse(String memberName, String spouseName) {
-		if (namesToMembersMapping.containsKey(memberName) == false) {
-			throw new MemberNotFound();
-		}
-		newMemberNameUniquenessCheck(spouseName);
-		Member member = namesToMembersMapping.get(memberName);
-		Member spouse = new Member(spouseName, member.getGender().opposite());
-		ModelProcedures.ADD_SPOUSE.run(member, spouse);
-		namesToMembersMapping.put(spouseName, spouse);
-	}
-
 	public void addChild(String memberName, String childName, Gender childGender) {
 		if (namesToMembersMapping.containsKey(memberName) == false) {
 			throw new MemberNotFound();
@@ -59,8 +48,15 @@ public class Family {
 		return relatives.stream().map(Member::getName).collect(Collectors.toList());
 	}
 
-	public Member get(String memberName) {
-		return namesToMembersMapping.get(memberName);
+	public void addSpouse(String memberName, String spouseName) {
+		if (namesToMembersMapping.containsKey(memberName) == false) {
+			throw new MemberNotFound();
+		}
+		newMemberNameUniquenessCheck(spouseName);
+		Member member = namesToMembersMapping.get(memberName);
+		Member spouse = new Member(spouseName, member.getGender().opposite());
+		ModelProcedures.ADD_SPOUSE.run(member, spouse);
+		namesToMembersMapping.put(spouseName, spouse);
 	}
 
 	private void newMemberNameUniquenessCheck(String memberName) {

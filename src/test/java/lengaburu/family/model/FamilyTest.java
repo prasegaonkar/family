@@ -4,14 +4,18 @@ import static lengaburu.family.model.relationships.Relationships.BROTHER;
 import static lengaburu.family.model.relationships.Relationships.BROTHER_IN_LAW;
 import static lengaburu.family.model.relationships.Relationships.CHILDREN;
 import static lengaburu.family.model.relationships.Relationships.DAUGHTER;
+import static lengaburu.family.model.relationships.Relationships.FATHER;
 import static lengaburu.family.model.relationships.Relationships.MATERNAL_AUNT;
 import static lengaburu.family.model.relationships.Relationships.MATERNAL_UNCLE;
+import static lengaburu.family.model.relationships.Relationships.MOTHER;
 import static lengaburu.family.model.relationships.Relationships.PATERNAL_AUNT;
 import static lengaburu.family.model.relationships.Relationships.PATERNAL_UNCLE;
+import static lengaburu.family.model.relationships.Relationships.SELF;
 import static lengaburu.family.model.relationships.Relationships.SIBLING;
 import static lengaburu.family.model.relationships.Relationships.SISTER;
 import static lengaburu.family.model.relationships.Relationships.SISTER_IN_LAW;
 import static lengaburu.family.model.relationships.Relationships.SON;
+import static lengaburu.family.model.relationships.Relationships.SPOUSE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
@@ -23,6 +27,10 @@ import lengaburu.family.model.relationships.Relationships;
 
 public class FamilyTest {
 	private Family family = null;
+	private Relationships self = SELF;
+	private Relationships mother = MOTHER;
+	private Relationships father = FATHER;
+	private Relationships spouse = SPOUSE;
 	private Relationships siblings = SIBLING;
 	private Relationships sisterInLaws = SISTER_IN_LAW;
 	private Relationships brotherInLaws = BROTHER_IN_LAW;
@@ -49,12 +57,10 @@ public class FamilyTest {
 	@Test
 	public void testForKingShan() {
 		final String name = "King Shan";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Queen Anga");
+		assertThat(family.get(name, self)).containsExactly(name);
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Queen Anga");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -72,12 +78,10 @@ public class FamilyTest {
 	@Test
 	public void testForQueenAnga() {
 		final String name = "Queen Anga";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("King Shan");
+		assertThat(family.get(name, self)).containsExactly(name);
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("King Shan");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -95,12 +99,9 @@ public class FamilyTest {
 	@Test
 	public void testForChit() {
 		final String name = "Chit";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Queen Anga");
-		assertThat(m.getFather().getName()).isEqualTo("King Shan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Amba");
+		assertThat(family.get(name, mother)).containsExactly("Queen Anga");
+		assertThat(family.get(name, father)).containsExactly("King Shan");
+		assertThat(family.get(name, spouse)).containsExactly("Amba");
 		assertThat(family.get(name, siblings)).containsExactly("Ish", "Vich", "Aras", "Satya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Lika", "Chitra");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vyan");
@@ -118,12 +119,9 @@ public class FamilyTest {
 	@Test
 	public void testForIsh() {
 		final String name = "Ish";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Queen Anga");
-		assertThat(m.getFather().getName()).isEqualTo("King Shan");
-		assertThat(m.getSpouse()).isNull();
+		assertThat(family.get(name, mother)).containsExactly("Queen Anga");
+		assertThat(family.get(name, father)).containsExactly("King Shan");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Chit", "Vich", "Aras", "Satya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Amba", "Lika", "Chitra");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vyan");
@@ -141,12 +139,9 @@ public class FamilyTest {
 	@Test
 	public void testForVich() {
 		final String name = "Vich";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Queen Anga");
-		assertThat(m.getFather().getName()).isEqualTo("King Shan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Lika");
+		assertThat(family.get(name, mother)).containsExactly("Queen Anga");
+		assertThat(family.get(name, father)).containsExactly("King Shan");
+		assertThat(family.get(name, spouse)).containsExactly("Lika");
 		assertThat(family.get(name, siblings)).containsExactly("Chit", "Ish", "Aras", "Satya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Amba", "Chitra");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vyan");
@@ -164,12 +159,9 @@ public class FamilyTest {
 	@Test
 	public void testForAras() {
 		final String name = "Aras";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Queen Anga");
-		assertThat(m.getFather().getName()).isEqualTo("King Shan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Chitra");
+		assertThat(family.get(name, mother)).containsExactly("Queen Anga");
+		assertThat(family.get(name, father)).containsExactly("King Shan");
+		assertThat(family.get(name, spouse)).containsExactly("Chitra");
 		assertThat(family.get(name, siblings)).containsExactly("Chit", "Ish", "Vich", "Satya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Amba", "Lika");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vyan");
@@ -187,12 +179,10 @@ public class FamilyTest {
 	@Test
 	public void testForSatya() {
 		final String name = "Satya";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Queen Anga");
-		assertThat(m.getFather().getName()).isEqualTo("King Shan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Vyan");
+
+		assertThat(family.get(name, mother)).containsExactly("Queen Anga");
+		assertThat(family.get(name, father)).containsExactly("King Shan");
+		assertThat(family.get(name, spouse)).containsExactly("Vyan");
 		assertThat(family.get(name, siblings)).containsExactly("Chit", "Ish", "Vich", "Aras");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Amba", "Lika", "Chitra");
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -210,12 +200,10 @@ public class FamilyTest {
 	@Test
 	public void testForAmba() {
 		final String name = "Amba";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Chit");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Chit");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Satya");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Ish", "Vich", "Aras");
@@ -233,12 +221,10 @@ public class FamilyTest {
 	@Test
 	public void testForLika() {
 		final String name = "Lika";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Vich");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Vich");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Satya");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Chit", "Ish", "Aras");
@@ -256,12 +242,10 @@ public class FamilyTest {
 	@Test
 	public void testForChitra() {
 		final String name = "Chitra";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Aras");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Aras");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Satya");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Chit", "Ish", "Vich");
@@ -279,12 +263,10 @@ public class FamilyTest {
 	@Test
 	public void testForVyan() {
 		final String name = "Vyan";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Satya");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Satya");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Chit", "Ish", "Vich", "Aras");
@@ -302,12 +284,10 @@ public class FamilyTest {
 	@Test
 	public void testForDritha() {
 		final String name = "Dritha";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Amba");
-		assertThat(m.getFather().getName()).isEqualTo("Chit");
-		assertThat(m.getSpouse().getName()).isEqualTo("Jaya");
+
+		assertThat(family.get(name, mother)).containsExactly("Amba");
+		assertThat(family.get(name, father)).containsExactly("Chit");
+		assertThat(family.get(name, spouse)).containsExactly("Jaya");
 		assertThat(family.get(name, siblings)).containsExactly("Tritha", "Vritha");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -325,12 +305,10 @@ public class FamilyTest {
 	@Test
 	public void testForTritha() {
 		final String name = "Tritha";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Amba");
-		assertThat(m.getFather().getName()).isEqualTo("Chit");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Amba");
+		assertThat(family.get(name, father)).containsExactly("Chit");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Dritha", "Vritha");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Jaya");
@@ -348,12 +326,10 @@ public class FamilyTest {
 	@Test
 	public void testForVritha() {
 		final String name = "Vritha";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Amba");
-		assertThat(m.getFather().getName()).isEqualTo("Chit");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Amba");
+		assertThat(family.get(name, father)).containsExactly("Chit");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Dritha", "Tritha");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Jaya");
@@ -371,12 +347,10 @@ public class FamilyTest {
 	@Test
 	public void testForVila() {
 		final String name = "Vila";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Lika");
-		assertThat(m.getFather().getName()).isEqualTo("Vich");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Lika");
+		assertThat(family.get(name, father)).containsExactly("Vich");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Chika");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -394,12 +368,10 @@ public class FamilyTest {
 	@Test
 	public void testForChika() {
 		final String name = "Chika";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Lika");
-		assertThat(m.getFather().getName()).isEqualTo("Vich");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Lika");
+		assertThat(family.get(name, father)).containsExactly("Vich");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Vila");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -417,12 +389,10 @@ public class FamilyTest {
 	@Test
 	public void testForJnki() {
 		final String name = "Jnki";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Chitra");
-		assertThat(m.getFather().getName()).isEqualTo("Aras");
-		assertThat(m.getSpouse().getName()).isEqualTo("Arit");
+
+		assertThat(family.get(name, mother)).containsExactly("Chitra");
+		assertThat(family.get(name, father)).containsExactly("Aras");
+		assertThat(family.get(name, spouse)).containsExactly("Arit");
 		assertThat(family.get(name, siblings)).containsExactly("Ahit");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -440,12 +410,10 @@ public class FamilyTest {
 	@Test
 	public void testForAhit() {
 		final String name = "Ahit";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Chitra");
-		assertThat(m.getFather().getName()).isEqualTo("Aras");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Chitra");
+		assertThat(family.get(name, father)).containsExactly("Aras");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Jnki");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Arit");
@@ -463,12 +431,10 @@ public class FamilyTest {
 	@Test
 	public void testForAsva() {
 		final String name = "Asva";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Satya");
-		assertThat(m.getFather().getName()).isEqualTo("Vyan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Satvy");
+
+		assertThat(family.get(name, mother)).containsExactly("Satya");
+		assertThat(family.get(name, father)).containsExactly("Vyan");
+		assertThat(family.get(name, spouse)).containsExactly("Satvy");
 		assertThat(family.get(name, siblings)).containsExactly("Vyas", "Atya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Krpi");
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -486,12 +452,10 @@ public class FamilyTest {
 	@Test
 	public void testForVyas() {
 		final String name = "Vyas";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Satya");
-		assertThat(m.getFather().getName()).isEqualTo("Vyan");
-		assertThat(m.getSpouse().getName()).isEqualTo("Krpi");
+
+		assertThat(family.get(name, mother)).containsExactly("Satya");
+		assertThat(family.get(name, father)).containsExactly("Vyan");
+		assertThat(family.get(name, spouse)).containsExactly("Krpi");
 		assertThat(family.get(name, siblings)).containsExactly("Asva", "Atya");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Satvy");
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -509,12 +473,10 @@ public class FamilyTest {
 	@Test
 	public void testForAtya() {
 		final String name = "Atya";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Satya");
-		assertThat(m.getFather().getName()).isEqualTo("Vyan");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Satya");
+		assertThat(family.get(name, father)).containsExactly("Vyan");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Asva", "Vyas");
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Satvy", "Krpi");
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -532,12 +494,10 @@ public class FamilyTest {
 	@Test
 	public void testForJaya() {
 		final String name = "Jaya";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Dritha");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Dritha");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Tritha");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vritha");
@@ -555,12 +515,10 @@ public class FamilyTest {
 	@Test
 	public void testForArit() {
 		final String name = "Arit";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Jnki");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Jnki");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Ahit");
@@ -578,12 +536,10 @@ public class FamilyTest {
 	@Test
 	public void testForSatvy() {
 		final String name = "Satvy";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Asva");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Asva");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Atya");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Vyas");
@@ -601,12 +557,10 @@ public class FamilyTest {
 	@Test
 	public void testForKrpi() {
 		final String name = "Krpi";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother()).isNull();
-		assertThat(m.getFather()).isNull();
-		assertThat(m.getSpouse().getName()).isEqualTo("Vyas");
+
+		assertThat(family.get(name, mother)).isNullOrEmpty();
+		assertThat(family.get(name, father)).isNullOrEmpty();
+		assertThat(family.get(name, spouse)).containsExactly("Vyas");
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).containsExactly("Atya");
 		assertThat(family.get(name, brotherInLaws)).containsExactly("Asva");
@@ -624,12 +578,10 @@ public class FamilyTest {
 	@Test
 	public void testForYodhan() {
 		final String name = "Yodhan";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Dritha");
-		assertThat(m.getFather().getName()).isEqualTo("Jaya");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Dritha");
+		assertThat(family.get(name, father)).containsExactly("Jaya");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -647,12 +599,10 @@ public class FamilyTest {
 	@Test
 	public void testForLaki() {
 		final String name = "Laki";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Jnki");
-		assertThat(m.getFather().getName()).isEqualTo("Arit");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Jnki");
+		assertThat(family.get(name, father)).containsExactly("Arit");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Lavnya");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -670,12 +620,10 @@ public class FamilyTest {
 	@Test
 	public void testForLavnya() {
 		final String name = "Lavnya";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Jnki");
-		assertThat(m.getFather().getName()).isEqualTo("Arit");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Jnki");
+		assertThat(family.get(name, father)).containsExactly("Arit");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Laki");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -693,12 +641,10 @@ public class FamilyTest {
 	@Test
 	public void testForVasa() {
 		final String name = "Vasa";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Satvy");
-		assertThat(m.getFather().getName()).isEqualTo("Asva");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Satvy");
+		assertThat(family.get(name, father)).containsExactly("Asva");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).isNullOrEmpty();
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -716,12 +662,10 @@ public class FamilyTest {
 	@Test
 	public void testForKriya() {
 		final String name = "Kriya";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.MALE);
-		assertThat(m.getMother().getName()).isEqualTo("Krpi");
-		assertThat(m.getFather().getName()).isEqualTo("Vyas");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Krpi");
+		assertThat(family.get(name, father)).containsExactly("Vyas");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Krithi");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
@@ -739,12 +683,10 @@ public class FamilyTest {
 	@Test
 	public void testForKrithi() {
 		final String name = "Krithi";
-		final Member m = family.get(name);
-		assertThat(m.getName()).isEqualTo(name);
-		assertThat(m.getGender()).isEqualTo(Gender.FEMALE);
-		assertThat(m.getMother().getName()).isEqualTo("Krpi");
-		assertThat(m.getFather().getName()).isEqualTo("Vyas");
-		assertThat(m.getSpouse()).isNull();
+
+		assertThat(family.get(name, mother)).containsExactly("Krpi");
+		assertThat(family.get(name, father)).containsExactly("Vyas");
+		assertThat(family.get(name, spouse)).isNullOrEmpty();
 		assertThat(family.get(name, siblings)).containsExactly("Kriya");
 		assertThat(family.get(name, sisterInLaws)).isNullOrEmpty();
 		assertThat(family.get(name, brotherInLaws)).isNullOrEmpty();
