@@ -14,7 +14,7 @@ These are as per specifications in the problem statement (Solution with build fi
 
  - Assumed that the names of the family members are unique.
  - Addition of spouse in the family tree is implemented on the lines similar to that of "ADD_CHILD" function.
- - Relationship, in general, is usually a complicated subject to understand. Current solution is implemented considering simple and basic understanding of this subject.
+ - Relationship, in general, is a complicated subject to understand. Current solution is implemented considering simple and basic understanding of this subject.
  - Some of the implemented `Relationships` are used only for testing purposes. They are not required/used to in application execution.
  - There could be cases or boundary conditions which might have got missed or are not covered in the implemented solution. For such cases, this solution can be improved upon; starting by adding failing tests for such cases. 
  - Current supported behavior of this application is defined "entirely" by written tests.
