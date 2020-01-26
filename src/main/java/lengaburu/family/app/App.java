@@ -1,4 +1,4 @@
-package lengaburu.family;
+package lengaburu.family.app;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -6,7 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import lengaburu.family.commands.CommandTypes;
+import lengaburu.family.ExecutionContext;
+import lengaburu.family.app.commands.CommandTypes;
 
 public class App {
 	public static void main(String[] args) throws IOException {

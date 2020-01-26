@@ -1,4 +1,4 @@
-package lengaburu.family;
+package lengaburu.family.app;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +15,8 @@ import java.util.UUID;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import lengaburu.family.TestContext;
 
 public class AppTest {
 	private App app = null;
