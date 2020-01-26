@@ -3,6 +3,7 @@ package lengaburu.family.model;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import lengaburu.family.model.exceptions.MemberAlreadyExists;
@@ -29,10 +30,8 @@ public class Family {
 	}
 
 	public void addChild(String memberName, String childName, Gender childGender) {
-		if (namesToMembersMapping.containsKey(memberName) == false) {
-			throw new MemberNotFound();
-		}
-		newMemberNameUniquenessCheck(childName);
+		memberNotFoundCheck(memberName);
+		nameUniquenessCheck(childName);
 		Member child = new Member(childName, childGender);
 		Member member = namesToMembersMapping.get(memberName);
 		ModelProcedures.ADD_CHILD.run(member, child);
@@ -40,32 +39,34 @@ public class Family {
 	}
 
 	public List<String> get(String memberName, Relationships relationship) {
-		if (namesToMembersMapping.containsKey(memberName) == false) {
-			throw new MemberNotFound();
-		}
+		memberNotFoundCheck(memberName);
 		final Member member = namesToMembersMapping.get(memberName);
 		final List<Member> relatives = relationship.resolve(member);
 		return relatives.stream().map(Member::getName).collect(Collectors.toList());
 	}
 
+	public List<Member> getMembersByFilter(Predicate<Member> predicate) {
+		return namesToMembersMapping.values().stream().filter(predicate).collect(Collectors.toList());
+	}
+
 	public void addSpouse(String memberName, String spouseName) {
-		if (namesToMembersMapping.containsKey(memberName) == false) {
-			throw new MemberNotFound();
-		}
-		newMemberNameUniquenessCheck(spouseName);
+		memberNotFoundCheck(memberName);
+		nameUniquenessCheck(spouseName);
 		Member member = namesToMembersMapping.get(memberName);
 		Member spouse = new Member(spouseName, member.getGender().opposite());
 		ModelProcedures.ADD_SPOUSE.run(member, spouse);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
 
-	private void newMemberNameUniquenessCheck(String memberName) {
-		if (namesToMembersMapping.containsKey(memberName)) {
-			throw new MemberAlreadyExists();
+	private void memberNotFoundCheck(String memberName) {
+		if (namesToMembersMapping.containsKey(memberName) == false) {
+			throw new MemberNotFound();
 		}
 	}
 
-	public Map<String, Member> getAll() {
-		return namesToMembersMapping;
+	private void nameUniquenessCheck(String memberName) {
+		if (namesToMembersMapping.containsKey(memberName)) {
+			throw new MemberAlreadyExists();
+		}
 	}
 }

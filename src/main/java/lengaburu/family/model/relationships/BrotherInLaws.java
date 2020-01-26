@@ -27,7 +27,6 @@ class BrotherInLaws implements Relation {
 		brotherInLaws.addAll(husbandsOfSisters);
 
 		Family family = ExecutionContext.getFamily();
-		return family.getAll().values().stream().filter(m -> brotherInLaws.contains(m)).collect(Collectors.toList());
+		return family.getMembersByFilter(m -> brotherInLaws.contains(m));
 	}
-
 }
