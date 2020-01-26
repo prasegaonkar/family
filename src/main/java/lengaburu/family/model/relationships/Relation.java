@@ -1,11 +1,10 @@
 package lengaburu.family.model.relationships;
 
 import java.util.List;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
-import lengaburu.family.model.Family;
 import lengaburu.family.model.Member;
 
-interface Relation extends BiFunction<Family, Member, List<Member>> {
+interface Relation extends Function<Member, List<Member>> {
 
 }

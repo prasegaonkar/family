@@ -2,7 +2,6 @@ package lengaburu.family.model.relationships;
 
 import java.util.List;
 
-import lengaburu.family.model.Family;
 import lengaburu.family.model.Member;
 
 public enum Relationships {
@@ -26,8 +25,8 @@ public enum Relationships {
 		return relationship;
 	}
 
-	public List<Member> resolve(Family family, Member member) {
-		return relationship.apply(family, member);
+	public List<Member> resolve(Member member) {
+		return relationship.apply(member);
 	}
 
 	public String getLabel() {

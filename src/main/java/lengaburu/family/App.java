@@ -7,12 +7,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import lengaburu.family.commands.CommandTypes;
-import lengaburu.family.model.Family;
 
 public class App {
-	private static final Family theShanFamily = InitialSetup.setup();
-
 	public static void main(String[] args) throws IOException {
+		ExecutionContext.setup();
 		String filePath = args[0];
 		new App().processFile(filePath, System.out);
 	}
@@ -32,7 +30,7 @@ public class App {
 			String[] tokens = line.split(" ");
 			if (tokens != null && tokens.length > 0) {
 				CommandTypes command = determineCommand(tokens[0]);
-				command.execute(theShanFamily, tokens, os);
+				command.execute(tokens, os);
 				os.write(System.lineSeparator().getBytes());
 			}
 		} catch (IOException e) {

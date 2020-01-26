@@ -55,7 +55,7 @@ public class Family {
 			throw new MemberNotFound();
 		}
 		final Member member = namesToMembersMapping.get(memberName);
-		final List<Member> relatives = relationship.resolve(this, member);
+		final List<Member> relatives = relationship.resolve(member);
 		return relatives.stream().map(Member::getName).collect(Collectors.toList());
 	}
 

@@ -13,10 +13,16 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class AppTest {
 	private App app = null;
+
+	@BeforeClass
+	public static void setupClass() {
+		TestContext.setup();
+	}
 
 	@Before
 	public void setup() {

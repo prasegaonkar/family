@@ -15,9 +15,10 @@ import static lengaburu.family.model.relationships.Relationships.SON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import lengaburu.family.InitialSetup;
+import lengaburu.family.TestContext;
 import lengaburu.family.model.relationships.Relationships;
 
 public class FamilyTest {
@@ -35,9 +36,14 @@ public class FamilyTest {
 	private Relationships daughters = DAUGHTER;
 	private Relationships sons = SON;
 
+	@BeforeClass
+	public static void setupClass() {
+		TestContext.setup();
+	}
+
 	@Before
 	public void setup() {
-		this.family = InitialSetup.setup();
+		this.family = TestContext.getFamily();
 	}
 
 	@Test
