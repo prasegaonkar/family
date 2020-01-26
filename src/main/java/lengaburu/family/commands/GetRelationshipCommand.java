@@ -31,16 +31,12 @@ public class GetRelationshipCommand implements AppCommand {
 	}
 
 	private Relationship determineRelationship(String rName) {
-		try {
-			for (RelationshipTypes r : RelationshipTypes.values()) {
-				if (r.getName().equalsIgnoreCase(rName)) {
-					return r.getRelationship();
-				}
+		for (RelationshipTypes r : RelationshipTypes.values()) {
+			if (r.getName().equalsIgnoreCase(rName)) {
+				return r.getRelationship();
 			}
-			throw new RuntimeException("Invalid relationship token observed: " + rName);
-		} catch (Exception ex) {
-			throw new RuntimeException("Invalid relationship token observed: " + rName);
 		}
+		throw new RuntimeException("Invalid relationship token observed: " + rName);
 	}
 
 }
