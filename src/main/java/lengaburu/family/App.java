@@ -1,51 +1,78 @@
 package lengaburu.family;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lengaburu.family.model.Family;
 import lengaburu.family.model.Gender;
 import lengaburu.family.model.Relationship;
+import lengaburu.family.model.exceptions.ChildAdditionFailed;
+import lengaburu.family.model.exceptions.MemberNotFound;
 
 public class App {
 	private static final Family theShanFamily = InitialSetup.setup();
 
 	public static void main(String[] args) throws IOException {
 		String filePath = args[0];
-		List<String> commands = Files.readAllLines(Paths.get(filePath));
-		commands.forEach(App::execute);
+		new App().process(filePath, System.out);
 	}
 
-	private static void execute(String command) {
+	public void process(String filePath, OutputStream os) throws IOException {
+		try {
+			List<String> commands = Files.readAllLines(Paths.get(filePath));
+			commands.forEach(c -> {
+				try {
+					execute(c, os);
+					os.write(System.lineSeparator().getBytes());
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			});
+		} catch (IOException e) {
+			os.write(e.getMessage().getBytes());
+		}
+	}
+
+	private void execute(String command, OutputStream os) throws IOException {
 		if (command != null && command.trim().length() > 0) {
 			command = command.trim();
 			String[] tokens = command.split(" ");
 			if (tokens != null && tokens.length > 0) {
 				ActionType actionType = determineAction(tokens[0]);
 				if (ActionType.ADD_CHILD.equals(actionType)) {
-					executeAddChild(tokens);
+					executeAddChild(tokens, os);
 				} else {
-					executeGetRelationship(tokens);
+					executeGetRelationship(tokens, os);
 				}
 			}
 		}
 	}
 
-	private static void executeGetRelationship(String[] tokens) {
+	private void executeGetRelationship(String[] tokens, OutputStream os) throws IOException {
 		if (tokens.length != 3) {
 			throw new RuntimeException("Invalid command syntax");
 		}
 		String memberName = tokens[1];
 		Relationship relationship = determineRelationship(tokens[2]);
-		theShanFamily.get(memberName, relationship);
+		try {
+			List<String> list = theShanFamily.get(memberName, relationship);
+			if (list.size() == 0) {
+				os.write("NONE".getBytes());
+			}
+			os.write(list.stream().collect(Collectors.joining(" ")).getBytes());
+		} catch (MemberNotFound memberNotFound) {
+			os.write("PERSON_NOT_FOUND".getBytes());
+		}
 	}
 
-	private static Relationship determineRelationship(String rName) {
+	private Relationship determineRelationship(String rName) {
 		try {
 			for (Relationships r : Relationships.values()) {
-				if (r.getName().equals(rName)) {
+				if (r.getName().equalsIgnoreCase(rName)) {
 					return r.getRelationship();
 				}
 			}
@@ -55,17 +82,24 @@ public class App {
 		}
 	}
 
-	private static void executeAddChild(String[] tokens) {
+	private void executeAddChild(String[] tokens, OutputStream os) throws IOException {
 		if (tokens.length != 4) {
 			throw new RuntimeException("Invalid command syntax");
 		}
 		String motherName = tokens[1];
 		String childName = tokens[2];
 		Gender childGender = determineGender(tokens[3]);
-		theShanFamily.addChild(motherName, childName, childGender);
+		try {
+			theShanFamily.addChild(motherName, childName, childGender);
+			os.write("CHILD_ADDITION_SUCCEEDED".getBytes());
+		} catch (MemberNotFound memberNotFound) {
+			os.write("PERSON_NOT_FOUND".getBytes());
+		} catch (ChildAdditionFailed childAdditionFailed) {
+			os.write("CHILD_ADDITION_FAILED".getBytes());
+		}
 	}
 
-	private static Gender determineGender(String gender) {
+	private Gender determineGender(String gender) {
 		try {
 			return Gender.valueOf(gender.toUpperCase());
 		} catch (Exception ex) {
@@ -73,13 +107,14 @@ public class App {
 		}
 	}
 
-	private static ActionType determineAction(String action) {
+	private ActionType determineAction(String action) {
 		try {
 			return ActionType.valueOf(action.toUpperCase());
 		} catch (Exception ex) {
 			throw new RuntimeException("Invalid action token observed: " + action);
 		}
 	}
+
 }
 
 enum ActionType {
