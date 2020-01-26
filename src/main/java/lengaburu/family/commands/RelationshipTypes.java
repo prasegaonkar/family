@@ -1,4 +1,4 @@
-package lengaburu.family;
+package lengaburu.family.commands;
 
 import lengaburu.family.model.Relationship;
 import lengaburu.family.model.relationships.BrotherInLaws;
@@ -14,7 +14,7 @@ import lengaburu.family.model.relationships.SisterInLaws;
 import lengaburu.family.model.relationships.Sisters;
 import lengaburu.family.model.relationships.Sons;
 
-public enum Relationships {
+public enum RelationshipTypes {
 	BROTHER_IN_LAW("brother-in-law", new BrotherInLaws()), BROTHER("brother", new Brothers()),
 	CHILDREN("children", new Children()), DAUGHTER("daughter", new Daughters()),
 	MATERNAL_AUNT("maternal-aunt", new MaternalAunts()), MATERNAL_UNCLE("maternal-uncle", new MaternalUncles()),
@@ -25,7 +25,7 @@ public enum Relationships {
 	private final String name;
 	private final Relationship relationship;
 
-	Relationships(String name, Relationship relationship) {
+	RelationshipTypes(String name, Relationship relationship) {
 		this.name = name;
 		this.relationship = relationship;
 	}

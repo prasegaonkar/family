@@ -41,7 +41,7 @@ public class AppTest {
 		File tempFile = Files.createTempFile(UUID.randomUUID().toString(), ".txt").toFile();
 		final String actualOutputFilePath = tempFile.getAbsolutePath();
 		FileOutputStream fos = new FileOutputStream(tempFile);
-		app.process(inputFilePath, fos);
+		app.processFile(inputFilePath, fos);
 		fos.close();
 
 		List<String> expectedOutput = Files.readAllLines(Paths.get(expectedOutputFilePath));
