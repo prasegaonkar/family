@@ -10,7 +10,7 @@ import lengaburu.family.model.Family;
 import lengaburu.family.model.Relationship;
 import lengaburu.family.model.exceptions.MemberNotFound;
 
-public class GetRelationshipCommand implements AppCommand {
+class GetRelationshipCommand implements AppCommand {
 
 	@Override
 	public void execute(Family family, String[] tokens, OutputStream os) throws IOException {

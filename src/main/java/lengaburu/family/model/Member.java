@@ -52,8 +52,4 @@ public class Member {
 		return relationship.apply(family, this);
 	}
 
-	public void add(AddMember procedure, Member newMember) {
-		procedure.accept(this, newMember);
-	}
-
 }

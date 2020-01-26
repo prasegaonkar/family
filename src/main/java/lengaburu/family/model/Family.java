@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 
 import lengaburu.family.model.exceptions.MemberAlreadyExists;
 import lengaburu.family.model.exceptions.MemberNotFound;
-import lengaburu.family.model.procedures.AddChild;
-import lengaburu.family.model.procedures.AddSpouse;
+import lengaburu.family.model.procedures.ModelProcedures;
 
 public class Family {
 	private final String name;
@@ -19,7 +18,7 @@ public class Family {
 		this.namesToMembersMapping = new LinkedHashMap<>();
 		final Member king = new Member(this, kingName, Gender.MALE);
 		final Member queen = new Member(this, queenName, Gender.FEMALE);
-		king.add(new AddSpouse(), queen);
+		ModelProcedures.ADD_SPOUSE.run(king, queen);
 		namesToMembersMapping.put(kingName, king);
 		namesToMembersMapping.put(queenName, queen);
 	}
@@ -35,7 +34,7 @@ public class Family {
 		newMemberNameUniquenessCheck(spouseName);
 		Member member = namesToMembersMapping.get(memberName);
 		Member spouse = new Member(this, spouseName, member.getGender().opposite());
-		member.add(new AddSpouse(), spouse);
+		ModelProcedures.ADD_SPOUSE.run(member, spouse);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
 
@@ -46,7 +45,7 @@ public class Family {
 		newMemberNameUniquenessCheck(childName);
 		Member child = new Member(this, childName, childGender);
 		Member member = namesToMembersMapping.get(memberName);
-		member.add(new AddChild(), child);
+		ModelProcedures.ADD_CHILD.run(member, child);
 		namesToMembersMapping.put(childName, child);
 	}
 

@@ -9,7 +9,7 @@ import lengaburu.family.model.Gender;
 import lengaburu.family.model.exceptions.ChildAdditionFailed;
 import lengaburu.family.model.exceptions.MemberNotFound;
 
-public class AddChildCommand implements AppCommand {
+class AddChildCommand implements AppCommand {
 
 	@Override
 	public void execute(Family family, String[] tokens, OutputStream os) throws IOException {
