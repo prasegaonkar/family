@@ -1,38 +1,39 @@
 package lengaburu.family.model;
 
+import static lengaburu.family.model.relationships.Relationships.BROTHER;
+import static lengaburu.family.model.relationships.Relationships.BROTHER_IN_LAW;
+import static lengaburu.family.model.relationships.Relationships.CHILDREN;
+import static lengaburu.family.model.relationships.Relationships.DAUGHTER;
+import static lengaburu.family.model.relationships.Relationships.MATERNAL_AUNT;
+import static lengaburu.family.model.relationships.Relationships.MATERNAL_UNCLE;
+import static lengaburu.family.model.relationships.Relationships.PATERNAL_AUNT;
+import static lengaburu.family.model.relationships.Relationships.PATERNAL_UNCLE;
+import static lengaburu.family.model.relationships.Relationships.SIBLING;
+import static lengaburu.family.model.relationships.Relationships.SISTER;
+import static lengaburu.family.model.relationships.Relationships.SISTER_IN_LAW;
+import static lengaburu.family.model.relationships.Relationships.SON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import lengaburu.family.InitialSetup;
-import lengaburu.family.model.relationships.BrotherInLaws;
-import lengaburu.family.model.relationships.Brothers;
-import lengaburu.family.model.relationships.Children;
-import lengaburu.family.model.relationships.Daughters;
-import lengaburu.family.model.relationships.MaternalAunts;
-import lengaburu.family.model.relationships.MaternalUncles;
-import lengaburu.family.model.relationships.PaternalAunts;
-import lengaburu.family.model.relationships.PaternalUncles;
-import lengaburu.family.model.relationships.Siblings;
-import lengaburu.family.model.relationships.SisterInLaws;
-import lengaburu.family.model.relationships.Sisters;
-import lengaburu.family.model.relationships.Sons;
+import lengaburu.family.model.relationships.Relationships;
 
 public class FamilyTest {
 	private Family family = null;
-	private Siblings siblings = new Siblings();
-	private SisterInLaws sisterInLaws = new SisterInLaws();
-	private BrotherInLaws brotherInLaws = new BrotherInLaws();
-	private Sisters sisters = new Sisters();
-	private Brothers brothers = new Brothers();
-	private MaternalAunts maternalAunts = new MaternalAunts();
-	private MaternalUncles maternalUncles = new MaternalUncles();
-	private PaternalAunts paternalAunts = new PaternalAunts();
-	private PaternalUncles paternalUncles = new PaternalUncles();
-	private Children children = new Children();
-	private Daughters daughters = new Daughters();
-	private Sons sons = new Sons();
+	private Relationships siblings = SIBLING;
+	private Relationships sisterInLaws = SISTER_IN_LAW;
+	private Relationships brotherInLaws = BROTHER_IN_LAW;
+	private Relationships sisters = SISTER;
+	private Relationships brothers = BROTHER;
+	private Relationships maternalAunts = MATERNAL_AUNT;
+	private Relationships maternalUncles = MATERNAL_UNCLE;
+	private Relationships paternalAunts = PATERNAL_AUNT;
+	private Relationships paternalUncles = PATERNAL_UNCLE;
+	private Relationships children = CHILDREN;
+	private Relationships daughters = DAUGHTER;
+	private Relationships sons = SON;
 
 	@Before
 	public void setup() {

@@ -1,7 +1,6 @@
 package lengaburu.family.model.procedures;
 
 import lengaburu.family.model.Member;
-import lengaburu.family.model.AddMember;
 
 public enum ModelProcedures {
 

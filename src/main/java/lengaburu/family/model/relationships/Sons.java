@@ -6,13 +6,12 @@ import java.util.stream.Collectors;
 import lengaburu.family.model.Family;
 import lengaburu.family.model.Gender;
 import lengaburu.family.model.Member;
-import lengaburu.family.model.Relationship;
 
-public class Sons implements Relationship {
+class Sons implements Relation {
 
 	@Override
 	public List<Member> apply(Family family, Member member) {
-		return member.get(new Children()).stream().filter(x -> Gender.MALE.equals(x.getGender()))
+		return Relationships.CHILDREN.resolve(family, member).stream().filter(x -> Gender.MALE.equals(x.getGender()))
 				.collect(Collectors.toList());
 	}
 

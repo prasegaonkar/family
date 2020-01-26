@@ -5,15 +5,14 @@ import java.util.List;
 
 import lengaburu.family.model.Family;
 import lengaburu.family.model.Member;
-import lengaburu.family.model.Relationship;
 
-public class PaternalAunts implements Relationship {
+class PaternalAunts implements Relation {
 
 	@Override
 	public List<Member> apply(Family family, Member member) {
 		Member father = member.getFather();
 		if (father != null) {
-			return father.get(new Sisters());
+			return Relationships.SISTER.resolve(family, father);
 		}
 		return new ArrayList<>();
 	}

@@ -1,17 +1,13 @@
 package lengaburu.family.model;
 
-import java.util.List;
-
 public class Member {
-	private final Family family;
 	private final String name;
 	private final Gender gender;
 	private Member mother;
 	private Member father;
 	private Member spouse;
 
-	public Member(Family family, String name, Gender gender) {
-		this.family = family;
+	public Member(String name, Gender gender) {
 		this.name = name;
 		this.gender = gender;
 	}
@@ -46,10 +42,6 @@ public class Member {
 
 	public Gender getGender() {
 		return gender;
-	}
-
-	public List<Member> get(Relationship relationship) {
-		return relationship.apply(family, this);
 	}
 
 }

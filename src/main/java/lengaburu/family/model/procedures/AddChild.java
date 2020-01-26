@@ -1,6 +1,5 @@
 package lengaburu.family.model.procedures;
 
-import lengaburu.family.model.AddMember;
 import lengaburu.family.model.Gender;
 import lengaburu.family.model.Member;
 import lengaburu.family.model.exceptions.ChildAdditionFailed;

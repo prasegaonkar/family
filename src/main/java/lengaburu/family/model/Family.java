@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lengaburu.family.model.exceptions.MemberAlreadyExists;
 import lengaburu.family.model.exceptions.MemberNotFound;
 import lengaburu.family.model.procedures.ModelProcedures;
+import lengaburu.family.model.relationships.Relationships;
 
 public class Family {
 	private final String name;
@@ -16,8 +17,8 @@ public class Family {
 	public Family(String name, String kingName, String queenName) {
 		this.name = name;
 		this.namesToMembersMapping = new LinkedHashMap<>();
-		final Member king = new Member(this, kingName, Gender.MALE);
-		final Member queen = new Member(this, queenName, Gender.FEMALE);
+		final Member king = new Member(kingName, Gender.MALE);
+		final Member queen = new Member(queenName, Gender.FEMALE);
 		ModelProcedures.ADD_SPOUSE.run(king, queen);
 		namesToMembersMapping.put(kingName, king);
 		namesToMembersMapping.put(queenName, queen);
@@ -33,7 +34,7 @@ public class Family {
 		}
 		newMemberNameUniquenessCheck(spouseName);
 		Member member = namesToMembersMapping.get(memberName);
-		Member spouse = new Member(this, spouseName, member.getGender().opposite());
+		Member spouse = new Member(spouseName, member.getGender().opposite());
 		ModelProcedures.ADD_SPOUSE.run(member, spouse);
 		namesToMembersMapping.put(spouseName, spouse);
 	}
@@ -43,18 +44,18 @@ public class Family {
 			throw new MemberNotFound();
 		}
 		newMemberNameUniquenessCheck(childName);
-		Member child = new Member(this, childName, childGender);
+		Member child = new Member(childName, childGender);
 		Member member = namesToMembersMapping.get(memberName);
 		ModelProcedures.ADD_CHILD.run(member, child);
 		namesToMembersMapping.put(childName, child);
 	}
 
-	public List<String> get(String memberName, Relationship relationship) {
+	public List<String> get(String memberName, Relationships relationship) {
 		if (namesToMembersMapping.containsKey(memberName) == false) {
 			throw new MemberNotFound();
 		}
 		final Member member = namesToMembersMapping.get(memberName);
-		final List<Member> relatives = member.get(relationship);
+		final List<Member> relatives = relationship.resolve(this, member);
 		return relatives.stream().map(Member::getName).collect(Collectors.toList());
 	}
 

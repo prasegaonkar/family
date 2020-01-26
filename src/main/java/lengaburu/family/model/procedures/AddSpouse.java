@@ -1,6 +1,5 @@
 package lengaburu.family.model.procedures;
 
-import lengaburu.family.model.AddMember;
 import lengaburu.family.model.Member;
 
 class AddSpouse implements AddMember {

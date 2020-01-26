@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import lengaburu.family.AppCommand;
 import lengaburu.family.model.Family;
-import lengaburu.family.model.Relationship;
 import lengaburu.family.model.exceptions.MemberNotFound;
+import lengaburu.family.model.relationships.Relationships;
 
 class GetRelationshipCommand implements AppCommand {
 
@@ -18,7 +18,7 @@ class GetRelationshipCommand implements AppCommand {
 			throw new RuntimeException("Invalid command syntax");
 		}
 		String memberName = tokens[1];
-		Relationship relationship = determineRelationship(tokens[2]);
+		Relationships relationship = determineRelationship(tokens[2]);
 		try {
 			List<String> list = family.get(memberName, relationship);
 			if (list.size() == 0) {
@@ -30,10 +30,10 @@ class GetRelationshipCommand implements AppCommand {
 		}
 	}
 
-	private Relationship determineRelationship(String rName) {
-		for (RelationshipTypes r : RelationshipTypes.values()) {
-			if (r.getName().equalsIgnoreCase(rName)) {
-				return r.getRelationship();
+	private Relationships determineRelationship(String rName) {
+		for (Relationships r : Relationships.values()) {
+			if (r.getLabel().equalsIgnoreCase(rName)) {
+				return r;
 			}
 		}
 		throw new RuntimeException("Invalid relationship token observed: " + rName);
