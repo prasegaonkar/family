@@ -18,7 +18,16 @@ public enum CommandTypes {
 	}
 
 	public void execute(String[] tokens, OutputStream os) throws IOException {
+		cmd.validateCommand(tokens);
 		cmd.execute(tokens, os);
+		os.write(System.lineSeparator().getBytes());
 	}
 
+	public static CommandTypes determineCommand(String command) {
+		try {
+			return CommandTypes.valueOf(command.toUpperCase());
+		} catch (Exception ex) {
+			throw new RuntimeException("Invalid command token observed: " + command);
+		}
+	}
 }

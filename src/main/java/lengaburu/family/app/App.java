@@ -30,20 +30,11 @@ public class App {
 		try {
 			String[] tokens = line.split(" ");
 			if (tokens != null && tokens.length > 0) {
-				CommandTypes command = determineCommand(tokens[0]);
+				CommandTypes command = CommandTypes.determineCommand(tokens[0]);
 				command.execute(tokens, os);
-				os.write(System.lineSeparator().getBytes());
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
-		}
-	}
-
-	private CommandTypes determineCommand(String command) {
-		try {
-			return CommandTypes.valueOf(command.toUpperCase());
-		} catch (Exception ex) {
-			throw new RuntimeException("Invalid command token observed: " + command);
 		}
 	}
 

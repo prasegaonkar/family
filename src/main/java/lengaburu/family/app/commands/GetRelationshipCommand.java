@@ -14,11 +14,8 @@ class GetRelationshipCommand implements AppCommand {
 
 	@Override
 	public void execute(String[] tokens, OutputStream os) throws IOException {
-		if (tokens.length != 3) {
-			throw new RuntimeException("Invalid command syntax");
-		}
 		String memberName = tokens[1];
-		Relationships relationship = determineRelationship(tokens[2]);
+		Relationships relationship = Relationships.determineRelationship(tokens[2]);
 		try {
 			Family family = ExecutionContext.getFamily();
 			List<String> list = family.get(memberName, relationship);
@@ -31,13 +28,11 @@ class GetRelationshipCommand implements AppCommand {
 		}
 	}
 
-	private Relationships determineRelationship(String rName) {
-		for (Relationships r : Relationships.values()) {
-			if (r.getLabel().equalsIgnoreCase(rName)) {
-				return r;
-			}
+	@Override
+	public void validateCommand(String[] tokens) {
+		if (tokens.length != 3) {
+			throw new RuntimeException("Invalid command syntax");
 		}
-		throw new RuntimeException("Invalid relationship token observed: " + rName);
 	}
 
 }

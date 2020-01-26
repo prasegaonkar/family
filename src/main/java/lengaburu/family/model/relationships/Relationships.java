@@ -34,4 +34,12 @@ public enum Relationships {
 		return label;
 	}
 
+	public static Relationships determineRelationship(String rName) {
+		for (Relationships r : Relationships.values()) {
+			if (r.getLabel().equalsIgnoreCase(rName)) {
+				return r;
+			}
+		}
+		throw new RuntimeException("Invalid relationship token observed: " + rName);
+	}
 }

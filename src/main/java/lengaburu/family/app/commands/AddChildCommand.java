@@ -13,12 +13,9 @@ class AddChildCommand implements AppCommand {
 
 	@Override
 	public void execute(String[] tokens, OutputStream os) throws IOException {
-		if (tokens.length != 4) {
-			throw new RuntimeException("Invalid command syntax");
-		}
 		String motherName = tokens[1];
 		String childName = tokens[2];
-		Gender childGender = determineGender(tokens[3]);
+		Gender childGender = Gender.determineGender(tokens[3]);
 		try {
 			Family family = ExecutionContext.getFamily();
 			family.addChild(motherName, childName, childGender);
@@ -30,11 +27,10 @@ class AddChildCommand implements AppCommand {
 		}
 	}
 
-	private Gender determineGender(String gender) {
-		try {
-			return Gender.valueOf(gender.toUpperCase());
-		} catch (Exception ex) {
-			throw new RuntimeException("Invalid gender token observed: " + gender);
+	@Override
+	public void validateCommand(String[] tokens) {
+		if (tokens.length != 4) {
+			throw new RuntimeException("Invalid command syntax");
 		}
 	}
 
